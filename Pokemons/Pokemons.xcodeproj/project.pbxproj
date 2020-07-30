@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DD26D74424D31FF500CF47DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26D74324D31FF500CF47DE /* AppDelegate.swift */; };
 		DD26D74624D31FF500CF47DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26D74524D31FF500CF47DE /* SceneDelegate.swift */; };
-		DD26D74824D31FF500CF47DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26D74724D31FF500CF47DE /* ViewController.swift */; };
 		DD26D74B24D31FF500CF47DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD26D74924D31FF500CF47DE /* Main.storyboard */; };
 		DD26D74D24D31FF600CF47DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD26D74C24D31FF600CF47DE /* Assets.xcassets */; };
 		DD26D75024D31FF600CF47DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD26D74E24D31FF600CF47DE /* LaunchScreen.storyboard */; };
@@ -19,7 +18,6 @@
 		DD26D74024D31FF500CF47DE /* Pokemons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD26D74324D31FF500CF47DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD26D74524D31FF500CF47DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD26D74724D31FF500CF47DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DD26D74A24D31FF500CF47DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD26D74C24D31FF600CF47DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD26D74F24D31FF600CF47DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,15 +54,54 @@
 		DD26D74224D31FF500CF47DE /* Pokemons */ = {
 			isa = PBXGroup;
 			children = (
-				DD26D74324D31FF500CF47DE /* AppDelegate.swift */,
-				DD26D74524D31FF500CF47DE /* SceneDelegate.swift */,
-				DD26D74724D31FF500CF47DE /* ViewController.swift */,
-				DD26D74924D31FF500CF47DE /* Main.storyboard */,
+				DD26D75A24D3206800CF47DE /* Resources */,
+				DD26D75924D3205E00CF47DE /* ViewControllers */,
+				DD26D75824D3204F00CF47DE /* ModelController */,
+				DD26D75724D3204A00CF47DE /* Model */,
+				DD26D75B24D3206E00CF47DE /* Storyboard */,
 				DD26D74C24D31FF600CF47DE /* Assets.xcassets */,
-				DD26D74E24D31FF600CF47DE /* LaunchScreen.storyboard */,
 				DD26D75124D31FF600CF47DE /* Info.plist */,
 			);
 			path = Pokemons;
+			sourceTree = "<group>";
+		};
+		DD26D75724D3204A00CF47DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DD26D75824D3204F00CF47DE /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelController;
+			sourceTree = "<group>";
+		};
+		DD26D75924D3205E00CF47DE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DD26D75A24D3206800CF47DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DD26D74324D31FF500CF47DE /* AppDelegate.swift */,
+				DD26D74524D31FF500CF47DE /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DD26D75B24D3206E00CF47DE /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DD26D74E24D31FF600CF47DE /* LaunchScreen.storyboard */,
+				DD26D74924D31FF500CF47DE /* Main.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +175,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD26D74824D31FF500CF47DE /* ViewController.swift in Sources */,
 				DD26D74424D31FF500CF47DE /* AppDelegate.swift in Sources */,
 				DD26D74624D31FF500CF47DE /* SceneDelegate.swift in Sources */,
 			);
