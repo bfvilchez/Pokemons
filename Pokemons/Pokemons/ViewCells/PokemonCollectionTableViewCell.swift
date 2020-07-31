@@ -10,11 +10,14 @@ import UIKit
 
 class PokemonCollectionTableViewCell: UITableViewCell {
     
-    // MARK: - Properties
-    static let identifier = String(describing: PokemonCollectionTableViewCell.self)
+    // MARK: - IBOutlets
     @IBOutlet weak var pokemonNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    var pokemonSprites: PokemonImage?
+    
+    // MARK: - Properties
+    static let identifier = String(describing: PokemonCollectionTableViewCell.self)
+    private let pokemonImageQueue = OperationQueue()
+    private  var pokemonSprites: PokemonImage?
     var pokemonApi: PokemonAPI?
     var pokemonResult: PokemonResults? {
         didSet {
@@ -32,7 +35,7 @@ class PokemonCollectionTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let pokemon = pokemonResult else { return }
         pokemonNameLabel.text = pokemon.name.capitalized
-        fetchPokemonImages(forPokemon: pokemon.name)
+        fetchPokemonSprites(forPokemon: pokemon.name)
         configureCollectionView()
     }
     
@@ -44,7 +47,8 @@ class PokemonCollectionTableViewCell: UITableViewCell {
         collectionView.contentInset = .init(top: 20, left: 10, bottom: 10, right: 50)
     }
     
-    private func fetchPokemonImages(forPokemon pokemon: String) {
+    // fetches the relevant sprites url for pokemon
+    private func fetchPokemonSprites(forPokemon pokemon: String) {
         pokemonApi?.fetchPokemonImage(forPokemon: pokemon, completion: { (pokemon, error) in
             if let error = error as NSError? {
                 print("error fetching pokemon: \(error)")
@@ -71,19 +75,35 @@ extension PokemonCollectionTableViewCell: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCollectionViewCell.identifier, for: indexPath) as? PokemonCollectionViewCell else { fatalError("failed to get proper cell")}
-        cell.pokemonImageURL = pokemonSprites?.images[indexPath.row]
-        cell.pokemonAPI = pokemonApi
+        cell.configureCellStyle()
+        fetchImage(forCell: cell, forIndexPath: indexPath)
         return cell
     }
+}
+
+// MARK: - fetch image for CollectionViewCell
+extension PokemonCollectionTableViewCell {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let image = pokemonSprites?.images[indexPath.row]
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "PokemonDetailVC") as? PokemonDetailViewController else { return }
-        vc.image = image
-        vc.pokemonName = pokemonResult?.name
-        vc.pokemonApi = pokemonApi
+    // fetches images from sprites URL.
+    private func fetchImage(forCell cell: PokemonCollectionViewCell, forIndexPath indexPath: IndexPath) {
+        guard let imageURL = pokemonSprites?.images[indexPath.row] else { return }
+        
+        let blockOperation = BlockOperation {
+            self.pokemonApi?.fetchImage(imageURL, completion: { (image, error) in
+                if let error = error as NSError? {
+                    print("error fetching pokemon: \(error)")
+                    return
+                } else {
+                    DispatchQueue.main.async {
+                        cell.pokemonImageView.image = image
+                    }
+                }
+            })
+        }
+        
+        pokemonImageQueue.addOperation(blockOperation)
     }
+    
 }
 
 // MARK: - collectionView FlowLayout

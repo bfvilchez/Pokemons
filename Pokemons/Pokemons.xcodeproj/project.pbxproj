@@ -18,7 +18,6 @@
 		DDD503C124D33EA800C13ACF /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD503C024D33EA800C13ACF /* Pokemon.swift */; };
 		DDD503C524D3469F00C13ACF /* PokemonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD503C424D3469F00C13ACF /* PokemonAPI.swift */; };
 		DDD503C724D3656E00C13ACF /* PokemonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD503C624D3656E00C13ACF /* PokemonImage.swift */; };
-		DDD503C924D3AE3B00C13ACF /* PokemonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD503C824D3AE3B00C13ACF /* PokemonDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		DDD503C224D3419A00C13ACF /* pokemonplayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = pokemonplayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DDD503C424D3469F00C13ACF /* PokemonAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAPI.swift; sourceTree = "<group>"; };
 		DDD503C624D3656E00C13ACF /* PokemonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonImage.swift; sourceTree = "<group>"; };
-		DDD503C824D3AE3B00C13ACF /* PokemonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				DD26D75C24D3223300CF47DE /* PokemonsTVC.swift */,
-				DDD503C824D3AE3B00C13ACF /* PokemonDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -222,7 +219,6 @@
 				DD26D76224D326A900CF47DE /* PokemonCollectionViewCell.swift in Sources */,
 				DD26D76024D323DA00CF47DE /* PokemonCollectionTableViewCell.swift in Sources */,
 				DDD503C124D33EA800C13ACF /* Pokemon.swift in Sources */,
-				DDD503C924D3AE3B00C13ACF /* PokemonDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

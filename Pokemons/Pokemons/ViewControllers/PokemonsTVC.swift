@@ -20,6 +20,7 @@ class PokemonsTVC: UIViewController {
         super.viewDidLoad()
         configureViews()
         navBarConfigure()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,10 +30,6 @@ class PokemonsTVC: UIViewController {
     
     // MARK: - helper Methods
     private func configureViews() {
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.9921568627, blue: 0.9921568627, alpha: 1)
         pokemonAPI.fetchPokemons { (results, error) in
             if let error = error as NSError? {
                 print("error fetching pokemons: \(error)")
@@ -44,6 +41,13 @@ class PokemonsTVC: UIViewController {
                 }
             }
         }
+    }
+    
+    private func configureTableView() {
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.9921568627, blue: 0.9921568627, alpha: 1)
     }
     
     private func navBarConfigure() {
