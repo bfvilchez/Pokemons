@@ -12,33 +12,62 @@ class PokemonsTVC: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
-    private let mockData = [ Person(name: "Brian", familyMembers: ["Dana", "Arian","Jesse", "Nathan"])]
+    private(set) var pokemonAPI = PokemonAPI()
+    private var pokemons = [PokemonResults]()
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
+        navBarConfigure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: - helper Methods
     private func configureViews() {
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.9921568627, blue: 0.9921568627, alpha: 1)
+        pokemonAPI.fetchPokemons { (results, error) in
+            if let error = error as NSError? {
+                print("error fetching pokemons: \(error)")
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.pokemons = results!
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
+    private func navBarConfigure() {
+        navigationController?.navigationBar.barTintColor = UIColor.systemRed
+        navigationController?.navigationBar.backgroundColor = .systemRed
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
 }
 
 // MARK: - TableView DataSource
 extension PokemonsTVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mockData.count
+        return pokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCollectionTableViewCell.identifier, for: indexPath) as? PokemonCollectionTableViewCell else { fatalError("could not dequeue proper cell")}
-        let person = mockData[indexPath.row]
-        cell.person = person
+        
+        let pokemon = pokemons[indexPath.row]
+        cell.pokemonApi = pokemonAPI
+        cell.pokemonResult = pokemon
         return cell
     }
     
@@ -46,14 +75,7 @@ extension PokemonsTVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 400
     }
     
-}
-
-
-struct Person {
-    
-    let name: String
-    let familyMembers: [String]
 }
