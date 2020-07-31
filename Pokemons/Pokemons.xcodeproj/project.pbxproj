@@ -72,11 +72,11 @@
 				DDD503C324D3469300C13ACF /* Network */,
 				DD26D75E24D323A700CF47DE /* ViewCells */,
 				DD26D75A24D3206800CF47DE /* Resources */,
+				DD26D75824D3204F00CF47DE /* ModelController */,
 				DD26D75924D3205E00CF47DE /* ViewControllers */,
 				DD26D75724D3204A00CF47DE /* Model */,
 				DD26D75B24D3206E00CF47DE /* Storyboard */,
 				DD26D74C24D31FF600CF47DE /* Assets.xcassets */,
-				DD26D75824D3204F00CF47DE /* ModelController */,
 				DD26D75124D31FF600CF47DE /* Info.plist */,
 			);
 			path = Pokemons;

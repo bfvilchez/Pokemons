@@ -14,13 +14,14 @@ class PokemonCollectionTableViewCell: UITableViewCell {
     static let identifier = String(describing: PokemonCollectionTableViewCell.self)
     @IBOutlet weak var pokemonNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    var pokemonSprites: PokemonImage?
     var pokemonApi: PokemonAPI?
     var pokemonResult: PokemonResults? {
         didSet {
             updateViews()
         }
     }
-    var pokemonSprites: PokemonImage? 
+    
     // MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +33,10 @@ class PokemonCollectionTableViewCell: UITableViewCell {
         guard let pokemon = pokemonResult else { return }
         pokemonNameLabel.text = pokemon.name.capitalized
         fetchPokemonImages(forPokemon: pokemon.name)
+        configureCollectionView()
+    }
+    
+    private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -69,6 +74,15 @@ extension PokemonCollectionTableViewCell: UICollectionViewDelegate, UICollection
         cell.pokemonImageURL = pokemonSprites?.images[indexPath.row]
         cell.pokemonAPI = pokemonApi
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let image = pokemonSprites?.images[indexPath.row]
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "PokemonDetailVC") as? PokemonDetailViewController else { return }
+        vc.image = image
+        vc.pokemonName = pokemonResult?.name
+        vc.pokemonApi = pokemonApi
     }
 }
 

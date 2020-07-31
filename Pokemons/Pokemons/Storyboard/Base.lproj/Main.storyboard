@@ -111,14 +111,53 @@
         <!--Pokemon Detail View Controller-->
         <scene sceneID="w6S-zE-PXh">
             <objects>
-                <viewController id="gPy-lo-5kN" customClass="PokemonDetailViewController" customModule="Pokemons" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PokemonDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gPy-lo-5kN" customClass="PokemonDetailViewController" customModule="Pokemons" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jfc-S6-Ltu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOx-fy-lg1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hy1-w6-xEQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AYj-cy-Ydd">
+                                            <rect key="frame" x="0.0" y="0.0" width="174" height="768"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZRd-er-fD6">
+                                                <rect key="frame" x="0.0" y="0.0" width="174" height="768"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="RYK-Zp-y6e" appends="YES" id="wdt-Eg-94X"/>
+                                    </connections>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e96-ks-KRX">
                                 <rect key="frame" x="32.5" y="152" width="349" height="496"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b2z-K9-6ox">
+                                        <rect key="frame" x="0.0" y="0.0" width="349" height="350"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="350" id="0GU-ok-RTD"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="b2z-K9-6ox" firstAttribute="top" secondItem="e96-ks-KRX" secondAttribute="top" id="QDx-w6-Kll"/>
+                                    <constraint firstAttribute="trailing" secondItem="b2z-K9-6ox" secondAttribute="trailing" id="REI-kb-eAr"/>
+                                    <constraint firstItem="b2z-K9-6ox" firstAttribute="leading" secondItem="e96-ks-KRX" secondAttribute="leading" id="c93-bF-EMt"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HY8-zd-mo1"/>
@@ -126,16 +165,26 @@
                         <constraints>
                             <constraint firstItem="HY8-zd-mo1" firstAttribute="bottom" secondItem="e96-ks-KRX" secondAttribute="bottom" constant="214" id="25I-H3-d7U"/>
                             <constraint firstItem="HY8-zd-mo1" firstAttribute="trailing" secondItem="e96-ks-KRX" secondAttribute="trailing" constant="32.5" id="GIw-KP-bFX"/>
+                            <constraint firstItem="BOx-fy-lg1" firstAttribute="leading" secondItem="HY8-zd-mo1" secondAttribute="leading" id="JyX-4r-bID"/>
+                            <constraint firstAttribute="bottom" secondItem="BOx-fy-lg1" secondAttribute="bottom" id="N7V-6M-YxE"/>
                             <constraint firstItem="e96-ks-KRX" firstAttribute="top" secondItem="HY8-zd-mo1" secondAttribute="top" constant="108" id="XEQ-x1-1sf"/>
+                            <constraint firstItem="BOx-fy-lg1" firstAttribute="trailing" secondItem="HY8-zd-mo1" secondAttribute="trailing" id="bLV-jj-vi0"/>
+                            <constraint firstItem="BOx-fy-lg1" firstAttribute="top" secondItem="Jfc-S6-Ltu" secondAttribute="top" id="l38-O6-gqd"/>
                             <constraint firstItem="e96-ks-KRX" firstAttribute="leading" secondItem="HY8-zd-mo1" secondAttribute="leading" constant="32.5" id="xcQ-4p-fE5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vFF-l7-0ok"/>
                     <connections>
+                        <outlet property="pokemonImageView" destination="b2z-K9-6ox" id="Tod-e2-D3q"/>
                         <outlet property="pokemonView" destination="e96-ks-KRX" id="BeY-nh-u0D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyl-6S-ODC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="RYK-Zp-y6e">
+                    <connections>
+                        <action selector="dismissCardView:" destination="gPy-lo-5kN" id="bKk-oO-mC3"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1818.840579710145" y="117.85714285714285"/>
         </scene>
