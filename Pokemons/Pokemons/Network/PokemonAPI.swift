@@ -10,9 +10,12 @@ import Foundation
 import UIKit
 
 class PokemonAPI {
+    
+    //MARK: - Properties
     var pokemons = [Pokemon]()
     private let baseURL = URL(string: "https://pokeapi.co/api/v2/pokemon")
     
+    // MARK: - API Fetch Methods
     func fetchPokemons(completion: @escaping([PokemonResults]?, NSError?) -> Void) {
         guard let pokemonResults = URL(string: "https://pokeapi.co/api/v2/pokemon/?offset=50&limit=100") else { return }
         var request = URLRequest(url: pokemonResults)
@@ -42,39 +45,6 @@ class PokemonAPI {
                 return
             }
         }.resume()
-    }
-    
-    func fetchPokemonDetails(forPokemon pokemon: String, completion: @escaping(Pokemon?,NSError?) ->Void) {
-        guard let pokemonResults = URL(string: "https://pokeapi.co/api/v2/pokemon/")?.appendingPathComponent(pokemon) else { return }
-        var request = URLRequest(url: pokemonResults)
-        request.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            // checking for errors
-            if let error = error as NSError? {
-                print("error fetching pokemon: \(error)")
-                completion(nil,error)
-                return
-            }
-            
-            //checking for data
-            guard let pokemonData = data else { return }
-            
-            // convert json into model object
-            do {
-                let decoder = JSONDecoder()
-                let pokemon = try decoder.decode(Pokemon.self, from: pokemonData)
-                completion(pokemon,nil)
-                
-            } catch let error as NSError {
-                print("error decoding pokemons: \(error)")
-                completion(nil,error)
-                return
-            }
-        }.resume()
-        
-        
     }
     func fetchPokemonImage(forPokemon name: String, completion: @escaping(PokemonImage?, NSError?) -> Void = { _,_ in }) {
         let baseURL = URL(string: "https://pokeapi.co/api/v2/pokemon/")?.appendingPathComponent(name)
